@@ -1,16 +1,19 @@
 def mostrarMenu():
-    texto = '''***********************************
-    Sistema de gerenciamento de pessoas
-    ***********************************
-    1 - Adicionar uma máquina no sistema
-    2 - Buscar uma máquina no sistema
-    3 - Listar todas as máquinas do sistema
-    4 - Atualizar uma máquina
-    5 - Excluir uma máquina do sistema
-    6 - Listar máquinas por categoria
-    7 - Inativar máquinas
-    0 - Sair do sistema
-    Escolha uma das opções acima:'''
+    texto = '''
+======================================================
+      SISTEMA DE GERENCIAMENTO DE MÁQUINAS
+======================================================
+
+1 - Adicionar uma máquina no sistema
+2 - Buscar uma máquina no sistema
+3 - Listar todas as máquinas do sistema
+4 - Atualizar uma máquina
+5 - Excluir uma máquina do sistema
+6 - Listar máquinas por categoria
+7 - Inativar máquinas
+0 - Sair do sistema
+
+Escolha uma das opções acima: '''
     
     return texto
 
@@ -31,6 +34,7 @@ def adicionarMaquina(maquinas, id, nome,marca, modelo,numero_serie,categoria, st
 
 def listarMaquinas(maquinas):
     for maquina in maquinas:
+        print("=" * 40)
         print('ID:', format(maquina['id']))
         print('Nome:', format(maquina['nome']))
         print('Marca:', format(maquina['marca']))
@@ -40,6 +44,7 @@ def listarMaquinas(maquinas):
         print('Status:', format(maquina['status']))
         print('Data de manutenção:', format(maquina['data_manutencao']))
         print('Fabricante:', format(maquina['fabricante']))
+        print("=" * 40)
 
 
 opcao = 1
@@ -47,6 +52,7 @@ maquinas =[]
 while opcao != 0:
     opcao = int(input(mostrarMenu()))
     if opcao == 1:
+        print("\n=== ADICIONAR MÁQUINA ===\n")
         id = int(input('Digite o id da máquina: '))
         nome = input('Digite o nome da máquina: ')
         marca = input('Digite a marca da máquina: ')
@@ -54,15 +60,15 @@ while opcao != 0:
         numero_serie = input('Digite o número de série da máquina: ')
         categoria = input('Digite a categoria da máquina: ')
         status = input('Digite o status da máquina: ')
-        data_manutencao = input('Digite a data de manutenção da máquina: ')
+        data_manutencao = input('Digite a data de manutenção (dd/mm/aaaa): ')
         fabricante = input('Digite o fabricante da máquina: ')
         maquina = adicionarMaquina(maquinas, id, nome, marca, modelo, numero_serie, categoria, status, data_manutencao, fabricante)
-        print('Máquina adicionada com sucesso!')
+        print('=== Máquina adicionada com sucesso! ===')
     elif opcao == 2:
         print('Buscar uma pessoa no sistema')
     elif opcao == 3:
         print('Listar todas as máquinas do sistema')
-        print('Máquinas cadastradas no sistema:')
+        print('\nMÁQUINAS CADASTRADAS NO SISTEMA')
         listarMaquinas(maquinas)
     elif opcao == 4:
         print('Atualizar uma máquina')
