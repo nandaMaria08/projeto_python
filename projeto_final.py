@@ -1,3 +1,11 @@
+from datetime import datetime
+
+ATIVA = 1
+INATIVA = 2
+MANUTENCAO = 3
+
+STATUS = {ATIVA:"Ativa", INATIVA:"Inativa", MANUTENCAO:"Em manutenção"}
+
 def mostrarMenu():
     texto = '''
 ======================================================
@@ -17,7 +25,11 @@ Escolha uma das opções acima: '''
     
     return texto
 
-def adicionarMaquina(maquinas, id, nome,marca, modelo,numero_serie,categoria, status, data_manutencao ,fabricante):
+def lerData():
+    data = input('digite a data de manutenção (dd/mm/aaaa): ')
+    return datetime.strptime(data, "%d/%m/%Y").date()
+
+def adicionarMaquina(maquinas, id, nome, marca, modelo, numero_serie, categoria, status, data_manutencao, fabricante):
     maquina = {
             'id': id,
             'nome': nome,
@@ -41,8 +53,8 @@ def listarMaquinas(maquinas):
         print('Modelo:', format(maquina['modelo']))
         print('Número de série:', format(maquina['numero_serie']))
         print('Categoria:', format(maquina['categoria']))
-        print('Status:', format(maquina['status']))
-        print('Data de manutenção:', format(maquina['data_manutencao']))
+        print('Status: {}'.format(STATUS[maquina['status']]))
+        print('Data de manutenção:',maquina['data_manutencao'].strftime("%d/%m/%Y"))
         print('Fabricante:', format(maquina['fabricante']))
         print("=" * 40)
 
@@ -59,26 +71,44 @@ while opcao != 0:
         modelo = input('Digite o modelo da máquina: ')
         numero_serie = input('Digite o número de série da máquina: ')
         categoria = input('Digite a categoria da máquina: ')
-        status = input('Digite o status da máquina: ')
-        data_manutencao = input('Digite a data de manutenção (dd/mm/aaaa): ')
+
+        print("1 - Ativa")
+        print("2 - Inativa")
+        print("3 - Em manutenção")
+        status = int(input("Digite uma das opções acima para definir o status: "))
+
+        while status < 1 or status > 3:
+            print("status invalido!")
+            status = int(input("Digite 1, 2 ou 3"))
+
+        data_manutencao = lerData()
+
         fabricante = input('Digite o fabricante da máquina: ')
         maquina = adicionarMaquina(maquinas, id, nome, marca, modelo, numero_serie, categoria, status, data_manutencao, fabricante)
         print('=== Máquina adicionada com sucesso! ===')
+
     elif opcao == 2:
-        print('Buscar uma pessoa no sistema')
+        print('Buscar uma máquina no sistema')
+
     elif opcao == 3:
         print('Listar todas as máquinas do sistema')
         print('\nMÁQUINAS CADASTRADAS NO SISTEMA')
         listarMaquinas(maquinas)
+
     elif opcao == 4:
         print('Atualizar uma máquina')
+
     elif opcao == 5:
         print('Excluir uma máquina do sistema')
+
     elif opcao == 6:
         print('Listar máquinas por categoria')
+
     elif opcao == 7:
-        print('Inativar máquinas')
+        print('Mudar status')
+
     elif opcao == 0:
         print('Sair do sistema')
+
     else:
         print('Opção inválida! \n Digite novamente')
