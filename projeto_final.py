@@ -53,7 +53,7 @@ def listarMaquinas(maquinas):
         print('Modelo:', format(maquina['modelo']))
         print('Número de série:', format(maquina['numero_serie']))
         print('Categoria:', format(maquina['categoria']))
-        print('Status: {}'.format(STATUS[maquina['status']]))
+        print("Status:", STATUS[maquina['status']])
         print('Data de manutenção:',maquina['data_manutencao'].strftime("%d/%m/%Y"))
         print('Fabricante:', format(maquina['fabricante']))
         print("=" * 40)
