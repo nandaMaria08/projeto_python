@@ -43,17 +43,18 @@ def adicionarMaquina(maquinas, id, nome, marca, modelo, numero_serie, categoria,
     maquinas.append(maquina)
     return maquina
 
-def salvarMaquinaEmArquivo(maquina, nome_arquivo='dados/dados.txt'):
-    with open(nome_arquivo, 'a', encoding='utf-8') as arquivo:
-        arquivo.write(f"ID: {maquina['id']}\n")
-        arquivo.write(f"Nome: {maquina['nome']}\n")
-        arquivo.write(f"Marca: {maquina['marca']}\n")
-        arquivo.write(f"Modelo: {maquina['modelo']}\n")
-        arquivo.write(f"Numero Serie: {maquina['numero_serie']}\n")
-        arquivo.write(f"Categoria: {maquina['categoria']}\n")
-        arquivo.write(f"Status: {maquina['status']}\n")
-        arquivo.write(f"Data Manutenção: {maquina['data_manutencao']}\n")
-        arquivo.write('-' * 30 + '\n')
+def salvarMaquinaEmArquivo(maquinas):
+    with open("dados/dados.txt", 'w', encoding='utf-8') as arquivo:
+        for maquina in maquinas:
+            arquivo.write(f"ID: {maquina['id']}\n")
+            arquivo.write(f"Nome: {maquina['nome']}\n")
+            arquivo.write(f"Marca: {maquina['marca']}\n")
+            arquivo.write(f"Modelo: {maquina['modelo']}\n")
+            arquivo.write(f"Numero Serie: {maquina['numero_serie']}\n")
+            arquivo.write(f"Categoria: {maquina['categoria']}\n")
+            arquivo.write(f"Status: {maquina['status']}\n")
+            arquivo.write(f"Data Manutenção: {maquina['data_manutencao'].strftime('%d/%m/%Y')}\n")
+            arquivo.write('-' * 30 + '\n')
 
 
 def listarMaquinas(maquinas):
@@ -66,12 +67,63 @@ def listarMaquinas(maquinas):
         print('Número de série:', format(maquina['numero_serie']))
         print('Categoria:', format(maquina['categoria']))
         print("Status:", STATUS[maquina['status']])
-        print('Data de manutenção:',maquina['data_manutencao'].strftime("%d/%m/%Y"))
+        if hasattr(maquina['data_manutencao'], 'strftime'):
+            data_manutencao = maquina['data_manutencao'].strftime("%d/%m/%Y")
+        else:
+            data_manutencao = maquina['data_manutencao']
+        print('Data de manutenção:', data_manutencao)
         print("=" * 40)
+        
+def lerDados():
+    maquinas = []
+    try:
+        with open("dados/dados.txt", 'r', encoding='utf-8') as arquivo:
+            bloco = {}
+            for linha in arquivo:
+                linha = linha.strip()
+                if not linha:
+                    continue
+                if linha.startswith('-'):
+                    if bloco:
+                        maquina = {
+                            'id': int(bloco.get('ID', 0)),
+                            'nome': bloco.get('Nome', ''),
+                            'marca': bloco.get('Marca', ''),
+                            'modelo': bloco.get('Modelo', ''),
+                            'numero_serie': bloco.get('Numero Serie', ''),
+                            'categoria': bloco.get('Categoria', ''),
+                            'status': int(bloco.get('Status', ATIVA)),
+                            'data_manutencao': datetime.strptime(bloco.get('Data Manutenção', '01/01/1900'), '%d/%m/%Y').date()
+                        }
+                        maquinas.append(maquina)
+                        bloco = {}
+                    continue
+
+                chave, valor = linha.split(':', 1)
+                bloco[chave.strip()] = valor.strip()
+
+            if bloco:
+                maquina = {
+                    'id': int(bloco.get('ID', 0)),
+                    'nome': bloco.get('Nome', ''),
+                    'marca': bloco.get('Marca', ''),
+                    'modelo': bloco.get('Modelo', ''),
+                    'numero_serie': bloco.get('Numero Serie', ''),
+                    'categoria': bloco.get('Categoria', ''),
+                    'status': int(bloco.get('Status', ATIVA)),
+                    'data_manutencao': datetime.strptime(bloco.get('Data Manutenção', '01/01/1900'), '%d/%m/%Y').date()
+                }
+                maquinas.append(maquina)
+    except FileNotFoundError:
+        return []
+    return maquinas
+        
+        
+        
 
 
 opcao = 1
-maquinas =[]
+maquinas = lerDados()
 while opcao != 0:
     opcao = int(input(mostrarMenu()))
     if opcao == 1:
@@ -119,7 +171,7 @@ while opcao != 0:
 
     elif opcao == 0:
         print('Sair do sistema')
-        salvarMaquinaEmArquivo(maquina)
+        salvarMaquinaEmArquivo(maquinas)
 
     else:
         print('Opção inválida! \n Digite novamente')

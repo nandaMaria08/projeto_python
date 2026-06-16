@@ -1,9 +1,18 @@
 ID: 1
-Nome: wdae
-Marca: wcd
-Modelo: fer
-Numero Serie: 123
-Categoria: vdr
+Nome: dcwq
+Marca: vrw
+Modelo: wrf
+Numero Serie: 1233
+Categoria: vqe
 Status: 1
-Data Manutenção: 2026-05-12
+Data Manutenção: 21/05/2026
+------------------------------
+ID: 1
+Nome: jnry
+Marca: nry
+Modelo: nry
+Numero Serie: 14
+Categoria: rt
+Status: 2
+Data Manutenção: 21/05/2009
 ------------------------------
