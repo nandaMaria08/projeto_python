@@ -95,7 +95,6 @@ while opcao != 0:
         data_manutencao = lerData()
 
         maquina = adicionarMaquina(maquinas, id, nome, marca, modelo, numero_serie, categoria, status, data_manutencao)
-        salvarMaquinaEmArquivo(maquina)
         print('=== Máquina adicionada com sucesso! ===')
 
     elif opcao == 2:
@@ -120,6 +119,7 @@ while opcao != 0:
 
     elif opcao == 0:
         print('Sair do sistema')
+        salvarMaquinaEmArquivo(maquina)
 
     else:
         print('Opção inválida! \n Digite novamente')
