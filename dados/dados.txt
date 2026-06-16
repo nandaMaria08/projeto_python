@@ -1,0 +1,9 @@
+ID: 1
+Nome: wdae
+Marca: wcd
+Modelo: fer
+Numero Serie: 123
+Categoria: vdr
+Status: 1
+Data Manutenção: 2026-05-12
+------------------------------

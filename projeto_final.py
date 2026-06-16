@@ -29,7 +29,7 @@ def lerData():
     data = input('digite a data de manutenção (dd/mm/aaaa): ')
     return datetime.strptime(data, "%d/%m/%Y").date()
 
-def adicionarMaquina(maquinas, id, nome, marca, modelo, numero_serie, categoria, status, data_manutencao, fabricante):
+def adicionarMaquina(maquinas, id, nome, marca, modelo, numero_serie, categoria, status, data_manutencao):
     maquina = {
             'id': id,
             'nome': nome,
@@ -38,11 +38,23 @@ def adicionarMaquina(maquinas, id, nome, marca, modelo, numero_serie, categoria,
             'numero_serie': numero_serie,
             'categoria': categoria,
             'status': status,
-            'data_manutencao': data_manutencao,
-            'fabricante': fabricante
+            'data_manutencao': data_manutencao
         }
     maquinas.append(maquina)
     return maquina
+
+def salvarMaquinaEmArquivo(maquina, nome_arquivo='dados/dados.txt'):
+    with open(nome_arquivo, 'a', encoding='utf-8') as arquivo:
+        arquivo.write(f"ID: {maquina['id']}\n")
+        arquivo.write(f"Nome: {maquina['nome']}\n")
+        arquivo.write(f"Marca: {maquina['marca']}\n")
+        arquivo.write(f"Modelo: {maquina['modelo']}\n")
+        arquivo.write(f"Numero Serie: {maquina['numero_serie']}\n")
+        arquivo.write(f"Categoria: {maquina['categoria']}\n")
+        arquivo.write(f"Status: {maquina['status']}\n")
+        arquivo.write(f"Data Manutenção: {maquina['data_manutencao']}\n")
+        arquivo.write('-' * 30 + '\n')
+
 
 def listarMaquinas(maquinas):
     for maquina in maquinas:
@@ -55,7 +67,6 @@ def listarMaquinas(maquinas):
         print('Categoria:', format(maquina['categoria']))
         print("Status:", STATUS[maquina['status']])
         print('Data de manutenção:',maquina['data_manutencao'].strftime("%d/%m/%Y"))
-        print('Fabricante:', format(maquina['fabricante']))
         print("=" * 40)
 
 
@@ -83,8 +94,8 @@ while opcao != 0:
 
         data_manutencao = lerData()
 
-        fabricante = input('Digite o fabricante da máquina: ')
-        maquina = adicionarMaquina(maquinas, id, nome, marca, modelo, numero_serie, categoria, status, data_manutencao, fabricante)
+        maquina = adicionarMaquina(maquinas, id, nome, marca, modelo, numero_serie, categoria, status, data_manutencao)
+        salvarMaquinaEmArquivo(maquina)
         print('=== Máquina adicionada com sucesso! ===')
 
     elif opcao == 2:
