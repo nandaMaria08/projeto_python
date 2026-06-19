@@ -70,20 +70,16 @@ def listarMaquinas(maquinas):
         return
     for maquina in maquinas:
         print("=" * 40)
-        print('ID:', format(maquina['id']))
-        print('Nome:', format(maquina['nome']))
-        print('Marca:', format(maquina['marca']))
-        print('Modelo:', format(maquina['modelo']))
-        print('Número de série:', format(maquina['numero_serie']))
-        print('Categoria:', format(maquina['categoria']))
-        print("Status:", format(STATUS[maquina['status']]))
-        if hasattr(maquina['data_manutencao'], 'strftime'):
-            data_manutencao = maquina['data_manutencao'].strftime("%d/%m/%Y")
-        else:
-            data_manutencao = maquina['data_manutencao']
-        print('Data de manutenção:', data_manutencao)
+        print("ID: {}".format(maquina['id']))
+        print("Nome: {}".format(maquina['nome']))
+        print("Marca: {}".format(maquina['marca']))
+        print("Modelo: {}".format(maquina['modelo']))
+        print("Número de série: {}".format(maquina['numero_serie']))
+        print("Categoria: {}".format(maquina['categoria']))
+        print("Status: {}".format(STATUS[maquina['status']]))
+        print("Data de manutenção: {}".format(maquina['data_manutencao'].strftime("%d/%m/%Y")))
         print("=" * 40)
-
+ 
 def atualizarMaquina(maquinas, busca, nome, marca, modelo, numero_serie, categoria, data_manutencao):
     if len(maquinas) == 0:
         print("Nenhuma máquina cadastrada!")
