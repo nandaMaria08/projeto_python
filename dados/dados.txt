@@ -1,1 +1,2 @@
 1;leg 90;wettor;45tgv;12345;inferiores;1;12/07/2026
+2;supino inclinado;wettor;rtx123;123456;superiores;1;12/06/2026

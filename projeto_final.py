@@ -18,7 +18,7 @@ def mostrarMenu():
 4 - Atualizar uma máquina
 5 - Excluir uma máquina do sistema
 6 - Listar máquinas por categoria
-7 - Inativar máquinas
+7 - Mudar status da máquina
 0 - Sair do sistema
 
 Escolha uma das opções acima: '''
@@ -116,6 +116,19 @@ def excluirMaquina(maquinas, busca):
 
     print("Máquina não encontrada!")
 
+def mudarStatus(maquinas, busca, status):
+    if len(maquinas )== 0:
+        print("Nenhuma máquina cadastrada!")
+        return
+    
+    for maquina in maquinas:
+        if busca == maquina['id']:
+            maquina['status'] = status
+            print("Status alterado com sucesso!")
+            return
+        
+    print('Máquina não encontrada!')
+
 def salvarMaquinaEmArquivo(maquinas):
     arquivo = open("dados/dados.txt", 'w')
     for maquina in maquinas:
@@ -127,7 +140,6 @@ def salvarMaquinaEmArquivo(maquinas):
         arquivo.write("{};".format(maquina['categoria']))
         arquivo.write("{};".format(maquina['status']))
         arquivo.write("{}\n".format(maquina['data_manutencao'].strftime('%d/%m/%Y')))
-
 
 def lerDados(maquinas):
     id = 0
@@ -150,7 +162,6 @@ def lerDados(maquinas):
         maquinas.append(maquina)
     return (id + 1)
             
-     
 opcao = 1
 maquinas = []
 cont = lerDados(maquinas)
@@ -182,18 +193,16 @@ while opcao != 0:
         cont += 1
 
     elif opcao == 2:
-        print('=== BUSCAR MÁQUINA ===')
+        print('\n=== BUSCAR MÁQUINA ===\n')
         busca = int(input("Digite o id da máquina: "))
         buscarMaquina(maquinas, busca)
 
-
     elif opcao == 3:
-        print('Listar todas as máquinas do sistema')
-        print('\nMÁQUINAS CADASTRADAS NO SISTEMA')
+        print('\n=== LISTAR MÁQUINAS ===\n')
         listarMaquinas(maquinas)
 
     elif opcao == 4:
-        print('=== Atualizar uma máquina ===')
+        print('\n=== ATUALIZAR MÁQUINA ===\n')
         busca = int(input("Digite o id da máquina a ser atualizada: "))
         nome = input("Digite o nome: ")
         marca = input("Digite a marca: ")
@@ -205,7 +214,7 @@ while opcao != 0:
         atualizarMaquina(maquinas, busca, nome, marca, modelo, numero_serie, categoria, data_manutencao)
 
     elif opcao == 5:
-        print('Excluir uma máquina do sistema')
+        print('\n=== EXCLUIR MÁQUINA ===\n')
         busca = int(input("Digite o id da máquina a ser excluida: "))
         excluirMaquina(maquinas, busca)
 
@@ -213,7 +222,20 @@ while opcao != 0:
         print('Listar máquinas por categoria')
 
     elif opcao == 7:
-        print('Mudar status')
+        print("=== MUDAR STATUS ===")
+        busca = int(input("Digite o id da máquina: "))
+
+        print("1 - Ativa")
+        print("2 - Inativa")
+        print("3 - Em manutenção")
+
+        status = int(input("Digite o novo status: "))
+
+        while status < 1 or status > 3:
+            print("Status inválido!")
+            status = int(input("Digite 1, 2 ou 3: "))
+
+        mudarStatus(maquinas, busca, status)
 
     elif opcao == 0:
         salvarMaquinaEmArquivo(maquinas)
