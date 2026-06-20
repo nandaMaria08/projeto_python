@@ -157,6 +157,32 @@ def lerDados(maquinas):
         maquina['data_manutencao'] = datetime.strptime(palavras[7].strip(),"%d/%m/%Y").date()
         maquinas.append(maquina)
     return (id + 1)
+
+def listarMaquinasPorCategoria(maquinas, categoria):
+    if len(maquinas) == 0:
+        print("Nenhuma máquina cadastrada!")
+        return
+
+    encontrou = False
+
+    for maquina in maquinas:
+        if maquina['categoria'].lower() == categoria.lower():
+            print("=" * 40)
+            print("ID: {}".format(maquina['id']))
+            print("Nome: {}".format(maquina['nome']))
+            print("Marca: {}".format(maquina['marca']))
+            print("Modelo: {}".format(maquina['modelo']))
+            print("Número de série: {}".format(maquina['numero_serie']))
+            print("Categoria: {}".format(maquina['categoria']))
+            print("Status: {}".format(STATUS[maquina['status']]))
+            print("Data de manutenção: {}".format(
+                maquina['data_manutencao'].strftime("%d/%m/%Y")
+            ))
+            print("=" * 40)
+            encontrou = True
+
+    if encontrou == False:
+        print("Nenhuma máquina encontrada nessa categoria!")
             
 opcao = 1
 maquinas = []
@@ -215,7 +241,9 @@ while opcao != 0:
         excluirMaquina(maquinas, busca)
 
     elif opcao == 6:
-        print('Listar máquinas por categoria')
+        print('\n=== LISTAR MÁQUINAS POR CATEGORIA ===\n')
+        categoria = input("Digite a categoria: ")
+        listarMaquinasPorCategoria(maquinas, categoria)
 
     elif opcao == 7:
         print("=== MUDAR STATUS ===")
