@@ -1,9 +1,11 @@
+# importa a classe datetime para trabalhar com datas
 from datetime import datetime
 
 ATIVA = 1
 INATIVA = 2
 MANUTENCAO = 3
 
+# dicionário usado para converter o código do status em texto
 STATUS = {ATIVA:"Ativa", INATIVA:"Inativa", MANUTENCAO:"Em manutenção"}
 
 def mostrarMenu():
@@ -27,6 +29,7 @@ Escolha uma das opções acima: '''
 
 def lerData():
     data = input('digite a data de manutenção (dd/mm/aaaa): ')
+    # converte a string digitada pra uma data
     return datetime.strptime(data, "%d/%m/%Y").date()
 
 def adicionarMaquina(maquinas, id, nome, marca, modelo, numero_serie, categoria, status, data_manutencao):
@@ -162,10 +165,11 @@ def listarMaquinasPorCategoria(maquinas, categoria):
     if len(maquinas) == 0:
         print("Nenhuma máquina cadastrada!")
         return
-
+    # variável usada para verificar se alguma máquina foi encontrada
     encontrou = False
 
     for maquina in maquinas:
+        # lower() permite comparar ignorando letras maiúsculas e minúsculas
         if maquina['categoria'].lower() == categoria.lower():
             print("=" * 40)
             print("ID: {}".format(maquina['id']))

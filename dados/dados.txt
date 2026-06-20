@@ -2,3 +2,5 @@
 2;esteira;wettor;164-we;1806-ne;cardio;3;10/06/2026
 3;haltere 5kg;acte sports;rgm8;12345;peso livre;1;16/06/2026
 4;Cadeira Abdutora;kikos fitness;niem15;163015;musculação;1;20/06/2026
+5;escada;lion;es-202;189345;cardio;2;15/06/2026
+6;anilha 20kg;acte sports;ac-404;673947;peso livre;1;18/06/2026
