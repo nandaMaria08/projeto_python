@@ -210,7 +210,7 @@ while opcao != 0:
         data_manutencao = lerData()
 
         maquina = adicionarMaquina(maquinas, cont, nome, marca, modelo, numero_serie, categoria, status, data_manutencao)
-        print('=== Máquina adicionada com sucesso! ===')
+        print('\nMáquina adicionada com sucesso!')
 
         cont += 1
 

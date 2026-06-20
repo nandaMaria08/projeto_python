@@ -1,4 +1,4 @@
-1;leg 90;wettor;45tgv;12345;inferiores;1;12/07/2026
-2;supino inclinado;wettor;rtx123;123456;superiores;1;12/06/2026
-3;nrgs;brfs;bg;12;cardio;2;05/12/2019
-4; ebdg;b df;bte;12;cardio;1;21/03/2028
+1;leg 45;lion;li-101;300108;musculação;1;16/06/2026
+2;esteira;wettor;164-we;1806-ne;cardio;3;10/06/2026
+3;haltere 5kg;acte sports;rgm8;12345;peso livre;1;16/06/2026
+4;Cadeira Abdutora;kikos fitness;niem15;163015;musculação;1;20/06/2026
